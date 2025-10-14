@@ -11,12 +11,10 @@
     "android:prod": "expo run:android  --configuration production --no-build-cache ",
     "ios:iphone:dev": "expo run:ios --configuration Debug --no-build-cache",
     "ios:iphone:prod": "expo run:ios --configuration production --no-build-cache",
-    "-----": "",
     "eas:ios:prod": "eas build -p ios --profile production",
     "eas:ios:dev": "eas build -p ios --profile development",
     "eas:android:prod": "eas build -p android --profile production",
     "eas:android:dev": "eas build -p android --profile development",
-    "-----": "",
     "eas:ios:submit": "eas build -p ios --profile production && eas submit -p ios",
     "eas:android:submit": "eas build -p android --profile production  &&  eas submit -p android --profile firebase-testing",
     "eas:android:only:submit": "eas submit -p android --profile firebase-testing"
@@ -50,5 +48,6 @@
     "@types/react": "~19.0.10",
     "typescript": "~5.8.3"
   },
-  "private": true
+  "private": true,
+  "packageManager": "yarn@4.9.4+sha256.516deeeced90791213ddcffc8d6712fcea7adff3e8d9879804284ba713462ce2"
 }
