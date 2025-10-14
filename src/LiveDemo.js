@@ -33,7 +33,7 @@ export default function App() {
 			<VpePlayer
 				ref={playerRef}
 				devTestAppId={'com.vpe.rn.testapp.v3'}
-				accessKey={'a2f86dac9d5f8962031851638df4d755'}
+				accessKey={'d3da8c1ea26e05cde1da9963cb41c973'}
 				platform={'pub'}
 				stage={'prod'}
 				backButton={() => {

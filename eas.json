@@ -31,18 +31,14 @@
   "submit": {
     "production": {
       "android": {
-        "serviceAccountKeyPath": "./.keys/vpe-rn-demo-v1-96662fb5864a.json",
         "track": "internal"
       },
       "ios": {
-        // appleId는 앱의 번들 ID가 아니라, 개발자의 Apple ID(이메일 주소)를 입력해야 합니다.
-        "appleId": "now17@sgrsoft.com"
+
       }
     },
     "firebase-testing": {
-      "android": {
-        "serviceAccountKeyPath": "./.keys/vpe-rn-demo-v1-96662fb5864a.json"
-      }
+
     }
   }
 }
