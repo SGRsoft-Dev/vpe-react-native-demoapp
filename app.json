@@ -1,0 +1,64 @@
+{
+  "expo": {
+    "name": "vpe-player-test-app",
+    "slug": "vpe-player-test-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vpe.rn.testapp.v3",
+      "buildNumber": "15",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIBackgroundModes": [
+          "audio",
+          "fetch"
+        ]
+      }
+
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.vpe.rn.testapp.v3",
+      "supportsPictureInPicture": true,
+      "permissions": [
+        "android.permission.FOREGROUND_SERVICE"
+      ],
+      "versionCode": 15
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+
+    "runtimeVersion": "1.0.0",
+
+    "plugins": [
+      [
+        "react-native-capture-protection",
+        {
+          "captureType": "fullMediaCapture"
+        }
+      ],
+      [
+        "@sgrsoft/react-native-video",
+        {
+          "enableAndroidPictureInPicture": true,
+          "enableNotificationControls": true
+
+        }
+      ]
+    ]
+  }
+}

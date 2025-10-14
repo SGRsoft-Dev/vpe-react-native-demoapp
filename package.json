@@ -1,0 +1,51 @@
+{
+  "name": "player-test-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start -c",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "android:fold7": "expo run:android --device \"SM_F966N\" --no-build-cache ",
+    "ios:iphone": "expo run:ios --device \"김종태의 iPhone\" --configuration Debug --no-build-cache",
+    "ios:iphone:prod": "expo run:ios --device \"김종태의 iPhone\" --configuration production --no-build-cache",
+    "web": "expo start --web",
+    "eas:ios:prod": "eas build -p ios --profile production",
+    "eas:android:prod": "eas build -p android --profile production",
+    "eas:ios:dev": "eas build -p ios --profile development",
+    "eas:android:dev": "eas build -p android --profile development",
+    "eas:ios:submit": "eas build -p ios --profile production && eas submit -p ios",
+    "eas:android:submit": "eas build -p android --profile production  &&  eas submit -p android --profile firebase-testing",
+    "eas:android:only:submit": "eas submit -p android --profile firebase-testing"
+  },
+  "dependencies": {
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/stack": "^7.4.8",
+    "@sgrsoft/react-native-video": "^6.16.1-sgrsoft.4",
+    "expo": "~53.0.22",
+    "expo-application": "^6.1.5",
+    "expo-localization": "^16.1.6",
+    "expo-navigation-bar": "^4.2.8",
+    "expo-network": "^8.0.7",
+    "expo-screen-capture": "^7.2.0",
+    "expo-screen-orientation": "^8.1.7",
+    "expo-status-bar": "~2.2.3",
+    "expo-updates": "~0.28.17",
+    "phosphor-react-native": "^3.0.0",
+    "react": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-base64": "^0.2.1",
+    "react-native-capture-protection": "^2.3.1",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-safe-area-context": "^5.4.0",
+    "react-native-screens": "~4.11.1",
+    "react-native-svg": "^15.13.0",
+    "vpe-react-native": "^0.0.2-beta.17"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~19.0.10",
+    "typescript": "~5.8.3"
+  },
+  "private": true
+}
