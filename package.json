@@ -9,17 +9,14 @@
     "-----": "",
     "android:prebuild": "expo prebuild --platform android",
     "ios:prebuild": "expo prebuild --platform ios",
-    "-----": "",
     "android:dev": "expo run:android  --no-build-cache ",
     "android:prod": "expo run:android  --configuration production --no-build-cache ",
     "ios:dev": "expo run:ios --configuration Debug --no-build-cache",
     "ios:prod": "expo run:ios --configuration production --no-build-cache",
-    "-----": "",
     "eas:android:prod": "eas build -p android --profile production",
     "eas:android:dev": "eas build -p android --profile development",
     "eas:ios:prod": "eas build -p ios --profile production",
     "eas:ios:dev": "eas build -p ios --profile development",
-    "-----": "",
     "eas:ios:submit": "eas build -p ios --profile production && eas submit -p ios",
     "eas:android:submit": "eas build -p android --profile production  &&  eas submit -p android --profile firebase-testing",
     "eas:android:only:submit": "eas submit -p android --profile firebase-testing"
@@ -46,7 +43,7 @@
     "react-native-safe-area-context": "^5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-svg": "^15.13.0",
-    "vpe-react-native": "^0.0.2-beta.17"
+    "vpe-react-native": "^0.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
