@@ -1,6 +1,6 @@
 # VPE React Native SDK DEMO APP
 
-<img src="https://tkmenfxu2702.edge.naverncp.com/profile/202508/429ff9d50047cc5462a718b256cca734.png" style="width:480px">
+<img src="https://tkmenfxu2702.edge.naverncp.com/profile/202510/80512f5502c01ffd50fb564cbed531cf.png" style="width:480px">
 
 ## 개발자 가이드 문서
 https://vpe.sgrsoft.com/blank/ade80b?mcode=1210&mmidx=0
