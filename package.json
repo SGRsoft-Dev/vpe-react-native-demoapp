@@ -43,7 +43,7 @@
     "react-native-safe-area-context": "^5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-svg": "^15.13.0",
-    "vpe-react-native": "^0.0.3"
+    "vpe-react-native": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

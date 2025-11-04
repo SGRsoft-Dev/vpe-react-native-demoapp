@@ -1983,6 +1983,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sgrsoft/react-native-video@npm:^6.16.1-sgrsoft.5":
+  version: 6.16.1-sgrsoft.5
+  resolution: "@sgrsoft/react-native-video@npm:6.16.1-sgrsoft.5"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/99e58cedc7db8530c33ab6b9708febbdd6dbc73484116c7d2b24d17aca508596f808678ff27755d16635ac29f1b0205b2be974d1255894e8c99d00231c5a3425
+  languageName: node
+  linkType: hard
+
 "@sinclair/typebox@npm:^0.27.8":
   version: 0.27.8
   resolution: "@sinclair/typebox@npm:0.27.8"
@@ -5530,7 +5540,7 @@ __metadata:
     react-native-screens: "npm:~4.11.1"
     react-native-svg: "npm:^15.13.0"
     typescript: "npm:~5.8.3"
-    vpe-react-native: "npm:^0.0.2"
+    vpe-react-native: "npm:^0.0.6"
   languageName: unknown
   linkType: soft
 
@@ -6848,12 +6858,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vpe-react-native@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "vpe-react-native@npm:0.0.2"
+"vpe-react-native@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "vpe-react-native@npm:0.0.6"
   dependencies:
     "@miblanchard/react-native-slider": "npm:^2.6.0"
-    "@sgrsoft/react-native-video": "npm:^6.16.1-sgrsoft.4"
+    "@sgrsoft/react-native-video": "npm:^6.16.1-sgrsoft.5"
     expo-constants: "npm:^17.1.7"
     expo-dev-client: "npm:^5.2.4"
     expo-modules-autolinking: "npm:^2.1.14"
@@ -6870,7 +6880,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-svg: "*"
-  checksum: 10c0/6d364e5c8a2398a7db0b7c5690b510b122bdb6b1505839e17c5ccb08168f73b598f0511a6c0aae7f05bc50f344bc993f1c3249824e26ca73e13a819a06f95777
+  checksum: 10c0/74918603168478dc330f670117553f7b85427f377c1cbbf33ac2e52fd606d57f85def2ea05c6b6cf36261a4b9c03893813f084e79a38d594f6dcb9802787dec1
   languageName: node
   linkType: hard
 
