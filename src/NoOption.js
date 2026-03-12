@@ -21,9 +21,7 @@ export default function App() {
 	useEffect(() => {
 		if (initLoad) return;
 		setTimeout(() => {
-			navigation.setOptions({
-				headerShown: true,
-			});
+
 			setInitLoad(true);
 		}, 300);
 	}, [lkey, initLoad]);
