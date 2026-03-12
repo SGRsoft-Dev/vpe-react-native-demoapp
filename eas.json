@@ -2,50 +2,40 @@
   "build": {
     "production": {
       "channel": "production",
-      "android": {
-        "buildType": "apk"
-      },
       "node": "22.12.0",
-      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate",
-      "config": "android-yarn4.yml"
+      "android": {
+        "buildType": "apk",
+        "config": "android-yarn4.yml"
+      },
+      "ios": {
+        "config": "ios-yarn4.yml"
+      }
     },
     "development": {
       "environment": "development",
       "developmentClient": true,
       "distribution": "internal",
-      "ios": {
-        "simulator": true
-      },
-      "android": {
-        "distribution": "internal"
-      },
       "node": "22.12.0",
-      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate"
-    },
-    "firebase-testing": {
-      "channel": "firebase-testing",
-      "android": {
-        "distribution": "internal"
-      },
       "ios": {
-        "distribution": "internal"
+        "simulator": true,
+        "config": "ios-yarn4.yml"
       },
-      "node": "22.12.0",
-      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate"
-    }
-  },
-
-  "submit": {
-    "production": {
       "android": {
-        "track": "internal"
-      },
-      "ios": {
-
+        "distribution": "internal",
+        "config": "android-yarn4.yml"
       }
     },
     "firebase-testing": {
-
+      "channel": "firebase-testing",
+      "node": "22.12.0",
+      "android": {
+        "distribution": "internal",
+        "config": "android-yarn4.yml"
+      },
+      "ios": {
+        "distribution": "internal",
+        "config": "ios-yarn4.yml"
+      }
     }
   }
 }

@@ -5,9 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 import { CaretLeftIcon } from 'phosphor-react-native';
 
 import { VpePlayer } from 'vpe-react-native';
+import { loadKey } from './lib/lickeyhook';
 
 export default function App() {
 	const navigation = useNavigation();
+	const lkey = loadKey();
 
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const playerRef = useRef(null);
@@ -19,10 +21,11 @@ export default function App() {
 
 			<VpePlayer
 				ref={playerRef}
-				devTestAppId={'com.vpereactnative.example'}
-				accessKey={'fe9d753ee708a519716e18a7ed8bd989'}
-				platform={'pub'}
-				stage={'prod'}
+				devTestAppId={lkey.testAppId}
+				accessKey={lkey.testKey}
+				platform={lkey.isGov ? 'gov' : 'pub'}
+				stage={lkey.isBeta ? 'beta' : 'prod'}
+				isDev={lkey.isDev ? true : false}
 				backButton={() => {
 					return (
 						<TouchableOpacity

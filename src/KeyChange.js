@@ -60,6 +60,15 @@ export default function App() {
 		<SafeAreaProvider>
 			<StatusBar barStyle={'dark-content'} />
 
+			<View style={{backgroundColor:'#ffffff',paddingTop:70,paddingBottom:20,paddingHorizontal:20,justifyContent:"space-between",flexDirection:'row',alignItems:'center'}}>
+				<TouchableOpacity onPress={() => navigation.goBack()}>
+					<Text style={{color:'#000000'}}>Back</Text>
+				</TouchableOpacity>
+				<View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+					<Text style={{fontWeight:'500'}}>라이선스키 변경 </Text>
+				</View>
+				<View style={{width:40}}></View>
+			</View>
 			<View style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 40 }}>
 				<View style={{ width: '100%', flexDirection: 'column', gap: 20 }}>
 					<View>
@@ -100,6 +109,32 @@ export default function App() {
 									테스트용 플레이어 생성시 Android , iOS 키를 위 내용으로 등록하세요.
 								</Text>
 							</View>
+						</View>
+					</View>
+
+					<View>
+						<View>
+							<Text style={{ fontSize: 16 }}>라이선스 키</Text>
+						</View>
+						<View>
+							<TextInput
+								editable
+								multiline
+								numberOfLines={4}
+								maxLength={40}
+								onChangeText={(text) => setLicKey(text)}
+								value={licKey}
+								style={{
+									backgroundColor: '#fff',
+									borderStyle: 'solid',
+									borderColor: '#cdcdcd',
+									paddingVertical: 10,
+									paddingHorizontal: 5,
+									borderWidth: 1,
+									borderRadius: 5,
+									marginTop: 10,
+								}}
+							/>
 						</View>
 					</View>
 
@@ -148,31 +183,7 @@ export default function App() {
 						<Switch ios_backgroundColor="#3e3e3e" onValueChange={setIsDev} value={isDev} />
 					</View>
 
-					<View>
-						<View>
-							<Text style={{ fontSize: 16 }}>라이선스 키</Text>
-						</View>
-						<View>
-							<TextInput
-								editable
-								multiline
-								numberOfLines={4}
-								maxLength={40}
-								onChangeText={(text) => setLicKey(text)}
-								value={licKey}
-								style={{
-									backgroundColor: '#fff',
-									borderStyle: 'solid',
-									borderColor: '#cdcdcd',
-									paddingVertical: 10,
-									paddingHorizontal: 5,
-									borderWidth: 1,
-									borderRadius: 5,
-									marginTop: 10,
-								}}
-							/>
-						</View>
-					</View>
+
 				</View>
 				<View style={{ justifyContent: 'center', alignItems: 'center', paddingVertical: 20 }}>
 					<TouchableOpacity

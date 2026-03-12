@@ -54,7 +54,7 @@ export default function App() {
 				<Stack.Screen
 					name="KeyChange"
 					component={KeyChange}
-					options={{ headerShown: true, title: 'VPE 라이선스 설정' }}
+					options={{ headerShown: false, title: 'VPE 라이선스 설정' }}
 				/>
 				<Stack.Screen
 					name="NoOption"

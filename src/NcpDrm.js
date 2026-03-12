@@ -14,9 +14,11 @@ import { VpePlayer } from 'vpe-react-native';
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { CaretLeftIcon } from 'phosphor-react-native';
+import { loadKey } from './lib/lickeyhook';
 
 export default function App() {
 	const navigation = useNavigation();
+	const lkey = loadKey();
 	const colorScheme = useColorScheme();
 	const isDarkMode = colorScheme === 'dark';
 
@@ -175,10 +177,11 @@ export default function App() {
 					{isPlayerReady && (
 						<VpePlayer
 							ref={playerRef}
-							devTestAppId={'com.vpereactnative.example'}
-							accessKey={'fe9d753ee708a519716e18a7ed8bd989'}
-							platform={'pub'}
-							stage={'prod'}
+							devTestAppId={lkey.testAppId}
+							accessKey={lkey.testKey}
+							platform={lkey.isGov ? 'gov' : 'pub'}
+							stage={lkey.isBeta ? 'beta' : 'prod'}
+				isDev={lkey.isDev ? true : false}
 							backButton={() => {
 								return (
 									<TouchableOpacity
