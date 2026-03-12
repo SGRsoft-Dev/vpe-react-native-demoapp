@@ -28,8 +28,8 @@ export default function App() {
 
 			<VpePlayer
 				ref={playerRef}
-				devTestAppId={'com.vpe.rn.testapp.v3'}
-				accessKey={'d3da8c1ea26e05cde1da9963cb41c973'}
+				devTestAppId={'com.vpereactnative.example'}
+				accessKey={'fe9d753ee708a519716e18a7ed8bd989'}
 				platform={'pub'}
 				stage={'prod'}
 				backButton={() => {

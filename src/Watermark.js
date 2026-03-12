@@ -19,8 +19,8 @@ export default function App() {
 
 			<VpePlayer
 				ref={playerRef}
-				devTestAppId={'com.vpe.rn.testapp.v3'}
-				accessKey={'d3da8c1ea26e05cde1da9963cb41c973'}
+				devTestAppId={'com.vpereactnative.example'}
+				accessKey={'fe9d753ee708a519716e18a7ed8bd989'}
 				platform={'pub'}
 				stage={'prod'}
 				backButton={() => {
@@ -44,7 +44,7 @@ export default function App() {
 				options={{
 					playlist: [
 						{
-							file: 'https://ps8ywblw3244.edge.naverncp.com/hls/rWdLjEm4u9qkuDXcqcRWeLGXZ4Y0~fbxGsojxGLixtA_/vod/JDPCILtJUbYObLmI/media-plus-99/DQEhtI6zHI_,AVC_SD_1Pass_30fps_1,AVC_HD_1Pass_30fps,AVC_FHD_1Pass_30fps,.mp4.smil/master.m3u8',
+							file: 'https://m4qgahqg2249.edge.naverncp.com/hls/a4oif2oPHP-HlGGWOFm29A__/endpoint/sample/221027_NAVER_Cloud_intro_Long_ver_AVC_,FHD_2Pass_30fps,HD_2Pass_30fps,SD_2Pass_30fps,.mp4.smil/master.m3u8',
 							poster: 'https://vvbk6ieu540.edge.naverncp.com/files/202309/97a26e48665c41e88d6920708e7eb7a7.png',
 							description: {
 								title: '네이버클라우드 소개 영상',

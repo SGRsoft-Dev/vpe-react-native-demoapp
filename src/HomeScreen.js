@@ -1,4 +1,15 @@
-import { StyleSheet, View, ScrollView, Button, Image, ImageBackground, Text, Pressable, StatusBar } from 'react-native';
+import {
+	StyleSheet,
+	View,
+	ScrollView,
+	Button,
+	Image,
+	ImageBackground,
+	Text,
+	Pressable,
+	StatusBar,
+	TouchableOpacity,
+} from 'react-native';
 
 import React, { useRef } from 'react';
 
@@ -22,7 +33,7 @@ export default function HomeScreen({ navigation }) {
 						uri: 'https://tkmenfxu2702.edge.naverncp.com/profile/202410/41da2868a7a004663066d88117a05e99.png',
 					}}
 					style={{
-						height: 180,
+						height: 220,
 						justifyContent: 'center',
 						alignItems: 'center',
 						marginBottom: 10,
@@ -60,6 +71,21 @@ export default function HomeScreen({ navigation }) {
 							}}
 						>
 							<Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 20 }}>React Native Demo</Text>
+							<View style={{ paddingTop: 10 }}>
+								<TouchableOpacity onPress={() => navigation.navigate('KeyChange')}>
+									<Text
+										style={{
+											color: '#fff',
+											backgroundColor: '#4e4e4e',
+											borderRadius: 5,
+											paddingVertical: 5,
+											paddingHorizontal: 10,
+										}}
+									>
+										콘솔 옵션 테스트
+									</Text>
+								</TouchableOpacity>
+							</View>
 						</View>
 					</View>
 				</ImageBackground>

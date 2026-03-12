@@ -20,6 +20,8 @@ import CustomButton from './CustomButton';
 import ErrorOverride from './ErrorOverride';
 import IconChange from './IconChange';
 import Override from './Override';
+import KeyChange from './KeyChange';
+import NoOption from './NoOption';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +51,16 @@ export default function App() {
 				<Stack.Screen name="ErrorOverride" component={ErrorOverride} options={{ headerShown: false }} />
 				<Stack.Screen name="IconChange" component={IconChange} options={{ headerShown: false }} />
 				<Stack.Screen name="Override" component={Override} options={{ headerShown: false }} />
+				<Stack.Screen
+					name="KeyChange"
+					component={KeyChange}
+					options={{ headerShown: true, title: 'VPE 라이선스 설정' }}
+				/>
+				<Stack.Screen
+					name="NoOption"
+					component={NoOption}
+					options={{ headerShown: false, title: 'VPE 라이선스 설정' }}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
