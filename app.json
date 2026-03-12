@@ -23,7 +23,6 @@
           "fetch"
         ]
       }
-
     },
     "android": {
       "adaptiveIcon": {
@@ -34,16 +33,15 @@
       "package": "com.vpe.rn.testapp.v3",
       "supportsPictureInPicture": true,
       "permissions": [
-        "android.permission.FOREGROUND_SERVICE"
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
       ],
       "versionCode": 15
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "runtimeVersion": "1.0.0",
-
     "plugins": [
       [
         "react-native-capture-protection",
@@ -56,9 +54,13 @@
         {
           "enableAndroidPictureInPicture": true,
           "enableNotificationControls": true
-
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "cc4e7584-36d0-4dae-a502-093b39764d05"
+      }
+    }
   }
 }

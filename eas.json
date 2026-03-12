@@ -4,7 +4,8 @@
       "channel": "production",
       "android": {
         "buildType": "apk"
-      }
+      },
+      "node": "22.12.0"
     },
     "development": {
       "environment": "development",
@@ -15,7 +16,8 @@
       },
       "android": {
         "distribution": "internal"
-      }
+      },
+      "node": "22.12.0"
     },
     "firebase-testing": {
       "channel": "firebase-testing",
@@ -24,7 +26,8 @@
       },
       "ios": {
         "distribution": "internal"
-      }
+      },
+      "node": "22.12.0"
     }
   },
 

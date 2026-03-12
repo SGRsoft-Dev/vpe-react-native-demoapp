@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx expo:*)"
+      "Bash(npx expo:*)",
+      "Bash(yarn run:*)",
+      "Bash(yarn info:*)",
+      "Bash(yarn install:*)",
+      "Bash(cd /Users/now17/Documents/vpe2.0/vpe-react-native-demoapp/android && ./gradlew app:assembleDebug -x lint -x test --configure-on-demand -PreactNativeArchitectures=arm64-v8a 2>&1 | tail -50)",
+      "Bash(adb devices:*)",
+      "Bash(chmod +x /Users/now17/Documents/vpe2.0/vpe-react-native-demoapp/.eas/build/pre-install.sh)"
     ]
   }
 }
