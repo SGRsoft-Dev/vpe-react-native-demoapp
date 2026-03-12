@@ -6,7 +6,8 @@
         "buildType": "apk"
       },
       "node": "22.12.0",
-      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate"
+      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate",
+      "config": "android-yarn4.yml"
     },
     "development": {
       "environment": "development",

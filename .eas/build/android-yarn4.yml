@@ -1,0 +1,14 @@
+build:
+  name: Android Yarn 4 build
+  steps:
+    - eas/checkout
+    - run:
+        name: Enable Corepack
+        command: corepack enable && corepack prepare yarn@4.9.4 --activate
+    - eas/install_node_modules
+    - eas/resolve_build_config
+    - eas/prebuild
+    - eas/inject_android_credentials
+    - eas/configure_android_version
+    - eas/run_gradle
+    - eas/find_and_upload_build_artifacts
