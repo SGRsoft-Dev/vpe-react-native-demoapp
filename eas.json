@@ -5,7 +5,8 @@
       "android": {
         "buildType": "apk"
       },
-      "node": "22.12.0"
+      "node": "22.12.0",
+      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate"
     },
     "development": {
       "environment": "development",
@@ -17,7 +18,8 @@
       "android": {
         "distribution": "internal"
       },
-      "node": "22.12.0"
+      "node": "22.12.0",
+      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate"
     },
     "firebase-testing": {
       "channel": "firebase-testing",
@@ -27,7 +29,8 @@
       "ios": {
         "distribution": "internal"
       },
-      "node": "22.12.0"
+      "node": "22.12.0",
+      "preInstall": "corepack enable && corepack prepare yarn@4.9.4 --activate"
     }
   },
 
