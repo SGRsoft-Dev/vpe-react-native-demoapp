@@ -1,12 +1,10 @@
-import { View, StatusBar, ScrollView, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, StatusBar, ScrollView, Text } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { VpePlayer } from 'vpe-react-native';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { CaretLeftIcon, ChatCircleIcon, InfoIcon } from 'phosphor-react-native';
 import { loadKey } from './lib/lickeyhook';
-
 export default function App() {
 	const navigation = useNavigation();
 	const lkey = loadKey();
@@ -26,20 +24,12 @@ export default function App() {
 				platform={lkey.isGov ? 'gov' : 'pub'}
 				stage={lkey.isBeta ? 'beta' : 'prod'}
 				isDev={lkey.isDev ? true : false}
-				backButton={() => {
-					return (
-						<TouchableOpacity
-							onPress={() => {
-								if (navigation.canGoBack()) {
-									navigation.goBack();
-								}
-							}}
-						>
-							<CaretLeftIcon size={22} color={'#ffffff'} />
-						</TouchableOpacity>
-					);
-				}}
 				events={{
+					backPress: () => {
+						if (navigation.canGoBack()) {
+							navigation.goBack();
+						}
+					},
 					error: (data) => {
 						console.log('error', data);
 					},

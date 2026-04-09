@@ -22,6 +22,8 @@ import IconChange from './IconChange';
 import Override from './Override';
 import KeyChange from './KeyChange';
 import NoOption from './NoOption';
+import LayoutDemo from './LayoutDemo';
+import ControlsShowcase from './ControlsShowcase';
 
 const Stack = createStackNavigator();
 
@@ -54,13 +56,15 @@ export default function App() {
 				<Stack.Screen
 					name="KeyChange"
 					component={KeyChange}
-					options={{ headerShown: false, title: 'VPE 라이선스 설정' }}
+					options={{ headerShown: true, title: 'VPE 라이선스 설정' }}
 				/>
 				<Stack.Screen
 					name="NoOption"
 					component={NoOption}
 					options={{ headerShown: false, title: 'VPE 라이선스 설정' }}
 				/>
+				<Stack.Screen name="LayoutDemo" component={LayoutDemo} options={{ headerShown: false }} />
+				<Stack.Screen name="ControlsShowcase" component={ControlsShowcase} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

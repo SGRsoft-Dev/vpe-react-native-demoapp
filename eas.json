@@ -8,6 +8,7 @@
         "config": "android-yarn4.yml"
       },
       "ios": {
+        "simulator": false,
         "config": "ios-yarn4.yml"
       }
     },
@@ -18,7 +19,7 @@
       "node": "22.12.0",
       "ios": {
         "simulator": true,
-        "config": "ios-yarn4.yml"
+        "config": "ios-simulator-yarn4.yml"
       },
       "android": {
         "distribution": "internal",

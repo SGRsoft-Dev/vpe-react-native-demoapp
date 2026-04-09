@@ -60,5 +60,22 @@ target 'vpeplayertestapp' do
         end
       end
     end
+
+    # Workaround for fmt + Xcode 16.3 / Clang consteval incompatibility:
+    # FMT_STRING uses consteval, which newer Clang refuses to evaluate as a
+    # constant expression in fmt's own format-inl.h. fmt/base.h unconditionally
+    # redefines FMT_USE_CONSTEVAL, so a -D flag won't stick — patch the header.
+    fmt_base = File.join(__dir__, 'Pods', 'fmt', 'include', 'fmt', 'base.h')
+    if File.exist?(fmt_base)
+      contents = File.read(fmt_base)
+      patched = contents.sub(
+        /\/\/ Detect consteval[^\n]*\n#if !defined\(__cpp_lib_is_constant_evaluated\).*?#endif\n/m,
+        "// Patched: force-disable consteval (Xcode 16.3 / Clang incompatibility)\n#define FMT_USE_CONSTEVAL 0\n"
+      )
+      if patched != contents
+        File.write(fmt_base, patched)
+        Pod::UI.puts "Patched fmt/base.h to disable FMT_USE_CONSTEVAL".green
+      end
+    end
   end
 end

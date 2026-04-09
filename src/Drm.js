@@ -1,22 +1,10 @@
-import {
-	StyleSheet,
-	Platform,
-	StatusBar,
-	ScrollView,
-	useColorScheme,
-	TouchableOpacity,
-	View,
-	Text,
-	Pressable,
-} from 'react-native';
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, Platform, StatusBar, ScrollView, View, Text } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { VpePlayer } from 'vpe-react-native';
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { CaretLeftIcon } from 'phosphor-react-native';
-import Constants from 'expo-constants';
-import { loadKey } from './lib/lickeyhook';
 
+import { loadKey } from './lib/lickeyhook';
 export default function App() {
 	const navigation = useNavigation();
 	const lkey = loadKey();
@@ -150,21 +138,13 @@ export default function App() {
 						accessKey={lkey.testKey}
 						platform={lkey.isGov ? 'gov' : 'pub'}
 						stage={lkey.isBeta ? 'beta' : 'prod'}
-				isDev={lkey.isDev ? true : false}
-						backButton={() => {
-							return (
-								<TouchableOpacity
-									onPress={() => {
-										if (navigation.canGoBack()) {
-											navigation.goBack();
-										}
-									}}
-								>
-									<CaretLeftIcon size={22} color={'#ffffff'} />
-								</TouchableOpacity>
-							);
-						}}
+						isDev={lkey.isDev ? true : false}
 						events={{
+							backPress: () => {
+								if (navigation.canGoBack()) {
+									navigation.goBack();
+								}
+							},
 							fullScreen: (data) => {
 								if (data.isFullScreen) {
 									setIsFullscreen(true);

@@ -5557,7 +5557,7 @@ __metadata:
     react-native-screens: "npm:~4.11.1"
     react-native-svg: "npm:15.11.2"
     typescript: "npm:~5.8.3"
-    vpe-react-native: "npm:^0.0.8"
+    vpe-react-native: "npm:^2.1.1"
   languageName: unknown
   linkType: soft
 
@@ -6841,9 +6841,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vpe-react-native@npm:^0.0.8":
-  version: 0.0.8
-  resolution: "vpe-react-native@npm:0.0.8"
+"vpe-react-native@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "vpe-react-native@npm:2.1.1"
   dependencies:
     "@miblanchard/react-native-slider": "npm:^2.6.0"
     "@sgrsoft/react-native-video": "npm:^6.16.1-sgrsoft.5"
@@ -6863,7 +6863,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-svg: "*"
-  checksum: 10c0/79fc4ae789de56116f73add494c1167b01821b8ee0f590571fca52867860c2960e9f605cc5cf5937de01008793d16b03072075d79ba895890dbed3242ce07871
+  checksum: 10c0/e5570f4b95b03f9307289de5912796f241abe66d2b364fd3d45c281f105ab9ed75821422734e6a3678b9f581a008170b4c299e704fada1185ad4ae47b6250c27
   languageName: node
   linkType: hard
 

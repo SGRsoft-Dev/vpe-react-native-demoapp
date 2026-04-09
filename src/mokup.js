@@ -25,7 +25,7 @@ export default function () {
 				>
 					<Image
 						source={{
-							uri: 'https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202208/d127c8db642716d84b3201f1d152e52a.png',
+							uri: 'https://tkmenfxu2702.edge.naverncp.com/profile/202511/cf38c0603c57faacd99cbe6d967c38b3.png',
 						}}
 						style={{
 							width: 34,
@@ -182,7 +182,7 @@ export default function () {
 				>
 					<Image
 						source={{
-							uri: 'https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202208/d127c8db642716d84b3201f1d152e52a.png',
+							uri: 'https://tkmenfxu2702.edge.naverncp.com/profile/202511/cf38c0603c57faacd99cbe6d967c38b3.png',
 						}}
 						style={{
 							width: 34,

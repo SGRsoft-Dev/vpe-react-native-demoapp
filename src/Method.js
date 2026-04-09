@@ -1,11 +1,10 @@
-import { View, StatusBar, ScrollView, TouchableOpacity, Text, Pressable } from 'react-native';
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View, StatusBar, ScrollView, Text, Pressable } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { VpePlayer } from 'vpe-react-native';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { CaretLeftIcon } from 'phosphor-react-native';
-import { loadKey } from './lib/lickeyhook';
 
+import { loadKey } from './lib/lickeyhook';
 export default function App() {
 	const navigation = useNavigation();
 	const lkey = loadKey();
@@ -40,20 +39,12 @@ export default function App() {
 				platform={lkey.isGov ? 'gov' : 'pub'}
 				stage={lkey.isBeta ? 'beta' : 'prod'}
 				isDev={lkey.isDev ? true : false}
-				backButton={() => {
-					return (
-						<TouchableOpacity
-							onPress={() => {
-								if (navigation.canGoBack()) {
-									navigation.goBack();
-								}
-							}}
-						>
-							<CaretLeftIcon size={22} color={'#ffffff'} />
-						</TouchableOpacity>
-					);
-				}}
 				events={{
+					backPress: () => {
+						if (navigation.canGoBack()) {
+							navigation.goBack();
+						}
+					},
 					ready: () => {
 						// 플레이어가 준비되면 호출됩니다.
 						setIsPlayerReady(true); // 플레이어가 준비되었음을 상태로 알립니다.
@@ -75,13 +66,13 @@ export default function App() {
 					playlist: [
 						{
 							file: 'https://m4qgahqg2249.edge.naverncp.com/hls/a4oif2oPHP-HlGGWOFm29A__/endpoint/sample/221027_NAVER_Cloud_intro_Long_ver_AVC_,FHD_2Pass_30fps,HD_2Pass_30fps,SD_2Pass_30fps,.mp4.smil/master.m3u8',
-							poster: 'https://vvbk6ieu540.edge.naverncp.com/files/202309/97a26e48665c41e88d6920708e7eb7a7.png',
+							poster: 'https://2ardrvaj2252.edge.naverncp.com/endpoint/sample/221027_NAVER_Cloud_intro_Long_ver_01.jpg',
 							description: {
 								title: '네이버클라우드 소개 영상',
 								created_at: '2025.08.20',
 								profile_name: '네이버클라우드',
 								profile_image:
-									'https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202208/d127c8db642716d84b3201f1d152e52a.png',
+									'https://tkmenfxu2702.edge.naverncp.com/profile/202511/cf38c0603c57faacd99cbe6d967c38b3.png',
 							},
 						},
 					],

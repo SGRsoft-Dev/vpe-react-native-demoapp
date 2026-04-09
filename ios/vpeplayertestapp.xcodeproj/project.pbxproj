@@ -21,7 +21,7 @@
 		13B07F961A680F5B00A75B9A /* vpeplayertestapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vpeplayertestapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = vpeplayertestapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = vpeplayertestapp/Info.plist; sourceTree = "<group>"; };
-		2A96D3C6E787D3A5067190E6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = vpeplayertestapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2A96D3C6E787D3A5067190E6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = vpeplayertestapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		634B15F7B11C6F981D07FEC1 /* Pods-vpeplayertestapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vpeplayertestapp.debug.xcconfig"; path = "Target Support Files/Pods-vpeplayertestapp/Pods-vpeplayertestapp.debug.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = vpeplayertestapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B6604DEB6762C8A486F90879 /* libPods-vpeplayertestapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vpeplayertestapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +119,6 @@
 				634B15F7B11C6F981D07FEC1 /* Pods-vpeplayertestapp.debug.xcconfig */,
 				0336F7205CDC43982777CA6E /* Pods-vpeplayertestapp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -348,6 +347,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = vpeplayertestapp/vpeplayertestapp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFUKHU4F38;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -384,6 +384,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = vpeplayertestapp/vpeplayertestapp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFUKHU4F38;
 				INFOPLIST_FILE = vpeplayertestapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (

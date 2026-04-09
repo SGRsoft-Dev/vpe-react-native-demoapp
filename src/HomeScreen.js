@@ -70,7 +70,9 @@ export default function HomeScreen({ navigation }) {
 								paddingVertical: 10,
 							}}
 						>
-							<Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 20 }}>React Native Demo</Text>
+							<Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 20 }}>
+								V2 React Native Demo
+							</Text>
 							<View style={{ paddingTop: 10 }}>
 								<TouchableOpacity onPress={() => navigation.navigate('KeyChange')}>
 									<Text
@@ -96,6 +98,68 @@ export default function HomeScreen({ navigation }) {
 						</View>
 						<View>
 							<Text style={[styles.demoBtnTextDesc]}>플레이어 UGC형 예제 코드</Text>
+						</View>
+					</Pressable>
+
+					<Pressable onPress={() => navigation.navigate('LayoutDemo')} style={styles.demoBtn}>
+						<View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+							<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+								<View
+									style={{
+										backgroundColor: '#ff0000',
+										borderRadius: 5,
+									}}
+								>
+									<Text
+										style={{
+											color: '#ffffff',
+											fontSize: 10,
+											paddingVertical: 2,
+											paddingHorizontal: 3,
+											fontWeight: 'bold',
+										}}
+									>
+										NEW
+									</Text>
+								</View>
+							</View>
+							<Text style={styles.demoBtnText}>레이아웃 시스템 Demo</Text>
+						</View>
+						<View>
+							<Text style={[styles.demoBtnTextDesc]}>
+								layout prop으로 ControlBar 구성을 정의하는 예제
+							</Text>
+						</View>
+					</Pressable>
+
+					<Pressable onPress={() => navigation.navigate('ControlsShowcase')} style={styles.demoBtn}>
+						<View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+							<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+								<View
+									style={{
+										backgroundColor: '#ff0000',
+										borderRadius: 5,
+									}}
+								>
+									<Text
+										style={{
+											color: '#ffffff',
+											fontSize: 10,
+											paddingVertical: 2,
+											paddingHorizontal: 3,
+											fontWeight: 'bold',
+										}}
+									>
+										NEW
+									</Text>
+								</View>
+							</View>
+							<Text style={styles.demoBtnText}>컨트롤 Showcase</Text>
+						</View>
+						<View>
+							<Text style={[styles.demoBtnTextDesc]}>
+								모든 컨트롤 컴포넌트를 한 화면에서 확인 (디자인 검증용)
+							</Text>
 						</View>
 					</Pressable>
 

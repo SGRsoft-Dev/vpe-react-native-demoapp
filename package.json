@@ -12,7 +12,7 @@
     "android:dev": "expo run:android  --no-build-cache ",
     "android:prod": "expo run:android  --configuration production --no-build-cache ",
     "ios:dev": "expo run:ios --configuration Debug --no-build-cache",
-    "ios:dev:simulator": "expo run:ios --configuration Debug --no-build-cache --device \"iPhone 16 Pro\"",
+    "ios:dev:simulator": "expo run:ios --configuration Debug --no-build-cache --device \"iPhone 17 Pro\"",
     "ios:prod": "expo run:ios --configuration production --no-build-cache",
     "eas:android:prod": "eas build -p android --profile production",
     "eas:android:dev": "eas build -p android --profile development",
@@ -45,7 +45,7 @@
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-svg": "15.11.2",
-    "vpe-react-native": "^0.0.8"
+    "vpe-react-native": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
