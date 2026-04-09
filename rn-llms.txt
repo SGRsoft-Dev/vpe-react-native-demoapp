@@ -1,0 +1,198 @@
+# vpe-react-native
+
+> Naver Cloud Platform (NCP) Video Player Enhancement (VPE) React Native SDK.
+> `@sgrsoft/react-native-video`를 감싸는 publishable RN 라이브러리. HLS 파싱, 미디어 분석(MA), 라이선스 키 검증, 결제 검증, 화면 캡처 방지, 워터마크, i18n(ko/en/ja/zh), 그리고 **layout-driven ControlBar 시스템**을 제공한다.
+
+이 파일은 AI 어시스턴트가 코드베이스를 빠르게 파악할 수 있도록 만든 가이드다. 사람용 가이드는 [README.md](README.md)와 [CLAUDE.md](CLAUDE.md)를 참고한다.
+
+## 프로젝트 형태
+
+- Yarn 4 monorepo, 두 workspace
+  - **root** (`vpe-react-native`): 라이브러리. `react-native-builder-bob` ESM 빌드, 산출물은 `lib/`
+  - **`example/`**: Expo 53 데모 앱, JS (TS 아님)
+- 진입점: [src/index.tsx](src/index.tsx) — `VpePlayer` export
+- 코드 컨벤션: 탭 인덴트, single quotes, 120 col, 한국어 주석, Conventional Commits
+
+## 핵심 개념 (이해 우선순위 순)
+
+### 1. VpePlayer 컴포넌트
+
+- [src/VpePlayer.tsx](src/VpePlayer.tsx) — `forwardRef` 메인 컴포넌트. 1700+ 라인
+- 책임: 인증/결제/MA/네트워크/플레이리스트/자막/풀스크린/PIP/캡처보호 등 모든 부수 효과
+- 자식: `<ControlBar>` + `<SettingsMenu>` + `<Watermark>` + `<Video>`(react-native-video)
+- 리렌더 안정화 패턴: `handlerRefs` ref + `stableActions` useMemo (Stage A에서 도입, useCallback cascade 회피용)
+- ref API: `play/pause/currentTime/muted/fullscreen/next/prev/pip/destroy/...`
+
+### 2. PlayerContext
+
+- [src/PlayerContext.tsx](src/PlayerContext.tsx) — 모든 컨트롤 컴포넌트가 prop drilling 없이 사용
+- 모든 필드 옵셔널, `usePlayerContextOptional()`로 안전 사용
+- 노출: 상태(`isPlaying`/`isFullScreen`/`isLive`/`isEnded`/`startPlay`/`isPip`/`hasSubtitle`/`selectedSubtitle`/`isMobile`/`isPortrait` 등) + 액션(`togglePlay`/`seek`/`toggleMute`/`toggleFullScreen`/`toggleSettings`/`toggleSubtitle`/`next`/`prev`/`pip`/`skipForward`/`skipBack`) + `events`/`validatedOptions`
+- VpePlayer가 `<PlayerProvider value={...}>`로 한 번 감싼다. 절대 prop drilling으로 되돌리지 말 것.
+
+### 3. layout 시스템 (ControlBar)
+
+웹 SDK([../vpe-react-sdk](../../vpe-react-sdk))에서 포팅한 핵심 시스템.
+
+- [src/ControlBar.tsx](src/ControlBar.tsx) — 메인 컨트롤바. layout-driven 렌더
+- [src/layout/types.ts](src/layout/types.ts) — `ControlBarLayout`, `ControlBarLayoutGroup`, `ControlBarLayoutVariant`(live/vod), `ControlBarLayoutResponsive`(pc/mobile/fullscreen+breakpoint), `ControlBarLayoutItemName`(22개 컨트롤 + Blank), `IconOverrides`(19개 키), `IconValue`(`ReactNode | string | number | () => ReactNode`)
+- [src/layout/useLayout.ts](src/layout/useLayout.ts) — 디폴트 `pcLayout`/`mobileLayout`/`fullscreenLayout` 정의 (각각 vod/live variant)
+- [src/layout/useLayoutResolver.ts](src/layout/useLayoutResolver.ts) — `useWindowDimensions` 기반 mobile 판정(breakpoint 768), fullscreen/uiMode 우선순위 처리, dev 모드에서 `warnLayoutIssues` 호출
+- [src/layout/layoutMerge.ts](src/layout/layoutMerge.ts) — 사용자 layout × 디폴트 병합 (responsive/variant/definition 모두 지원, 섹션 단위 replace)
+- [src/layout/ControlBarSection.tsx](src/layout/ControlBarSection.tsx) — `renderSection`/`renderGroup`. bottom 섹션의 좌/우 분할 로직 포함
+- [src/layout/ControlBarItemRenderers.tsx](src/layout/ControlBarItemRenderers.tsx) — 이름 → 컴포넌트 매핑 (switch)
+- [src/layout/validateLayout.ts](src/layout/validateLayout.ts) — dev 모드 layout 검증, `__DEV__`에서 console.warn
+
+핵심 흐름:
+```
+사용자 layout prop
+  → mergeLayouts(default, user)
+  → useLayoutResolver(merged, isFullScreen, isLive, isMobile)
+  → resolvedLayout (단일 ControlBarLayout)
+  → order.map() → renderSection() → renderGroup() → renderControlItem() → 컨트롤 컴포넌트
+```
+
+### 4. 단위 컨트롤 컴포넌트
+
+[src/controls/](src/controls/) — 각 컴포넌트는 PlayerContext를 통해 작동. props는 `{ size?, color? }` 정도로 최소화.
+
+| 컴포넌트 | 역할 |
+|---|---|
+| [PlayBtn.tsx](src/controls/PlayBtn.tsx) | play/pause/replay 토글 (isEnded 분기) |
+| [BigPlayBtn.tsx](src/controls/BigPlayBtn.tsx) | 중앙 큰 재생 버튼. playlist > 1 시 양옆 prev/next 자동 표시. isEnded + 다음 영상 시 NextVideoInfo로 자동 전환 |
+| [VolumeBtn.tsx](src/controls/VolumeBtn.tsx) / [MuteBtn.tsx](src/controls/MuteBtn.tsx) | 음량 토글 |
+| [TimeBtn.tsx](src/controls/TimeBtn.tsx) | 현재시간/총시간 또는 LIVE 인디케이터 (`isLive \|\| startPlay`) |
+| [CurrentTimeBtn.tsx](src/controls/CurrentTimeBtn.tsx) / [DurationBtn.tsx](src/controls/DurationBtn.tsx) | 분리 버전 |
+| [SeekBar.tsx](src/controls/SeekBar.tsx) | 진행도 슬라이더 (`@miblanchard/react-native-slider`). `noMargin` prop으로 ControlBar의 bottom seekbar 슬롯에서 사용 |
+| [FullscreenBtn.tsx](src/controls/FullscreenBtn.tsx) | 전체화면 토글 |
+| [SubtitleBtn.tsx](src/controls/SubtitleBtn.tsx) | 자막 즉시 토글 (SettingsMenu 거치지 않음) |
+| [SettingBtn.tsx](src/controls/SettingBtn.tsx) | SettingsMenu 토글 |
+| [PrevBtn.tsx](src/controls/PrevBtn.tsx) / [NextBtn.tsx](src/controls/NextBtn.tsx) / [NextPrevBtn.tsx](src/controls/NextPrevBtn.tsx) | 트랙 이동 |
+| [BackBtn.tsx](src/controls/BackBtn.tsx) | events.backPress 호출. 네비게이션은 사용자 책임 |
+| [ShareBtn.tsx](src/controls/ShareBtn.tsx) | RN Share API |
+| [SkipForwardBtn.tsx](src/controls/SkipForwardBtn.tsx) / [SkipBackBtn.tsx](src/controls/SkipBackBtn.tsx) | 10초 단위 |
+| [MetaDesc.tsx](src/controls/MetaDesc.tsx) | 영상 메타데이터 (제목/프로필/등록일) |
+| [NextVideoInfo.tsx](src/controls/NextVideoInfo.tsx) | 영상 종료 후 다음 영상 카드 (5초 카운트다운) |
+| [SeekIndicator.tsx](src/controls/SeekIndicator.tsx) | 더블탭 seek 시각 피드백 (방사형 애니메이션) |
+| [Group.tsx](src/controls/Group.tsx) | wrapper:'Group'. 디폴트 알약 모양 (gray 0.4 배경, borderRadius 999), 단일 자식이면 원형 (`aspectRatio:1`), TimeBtn 단일은 우회 |
+| [Blank.tsx](src/controls/Blank.tsx) | wrapper:'Blank'. 자식 없으면 spacer(`flex:1`), 자식 있으면 align 적용 row |
+| [styles.ts](src/controls/styles.ts) | 공통 스타일 (`controlStyles.roundedBtnOpa` 등) |
+
+### 5. IconOverrides
+
+- 위치: [src/layout/types.ts](src/layout/types.ts)의 `IconOverrides` interface (19개 키)
+- 사용: `options.icon: IconOverrides` (PR1에서 `props.icon` → `options.icon`으로 이동, breaking change)
+- 값 타입 `IconValue`:
+  - `ReactNode` — JSX 직접 전달
+  - `string` — 원격 이미지 URL → `<Image source={{uri}}/>`
+  - `number` — `require('./icon.png')` 결과 → 로컬 이미지
+  - `() => ReactNode` — 동적 렌더링용 함수형
+- 처리 헬퍼: [src/layout/iconRenderer.tsx](src/layout/iconRenderer.tsx) `renderIcon(override, fallback, opts)`
+- 키: `bigPlay`, `play`, `pause`, `replay`, `prev`, `next`, `subtitle`, `subtitleOff`, `fullscreen`, `fullscreenExit`, `volumeFull`, `volumeMid`, `volumeMute`, `setting`, `back`, `share`, `skipForward`, `skipBack`, (Pip 키는 PR2에서 PipBtn 폐지 시 제거됨)
+
+### 6. 제스처 (useTapGestures)
+
+- [src/hooks/useTapGestures.ts](src/hooks/useTapGestures.ts) — 단일/더블탭 처리
+- ControlBar에서 `Pressable`의 `onPress`/`onLayout`에 연결
+- 좌/중/우 1/3 영역 분할 (`width / 3`)
+- 단일탭 토글은 `DOUBLE_TAP_DELAY=300ms` 만큼 지연 (그동안 두 번째 탭이 들어오면 더블탭 처리, 컨트롤 깜빡임 방지)
+- 더블탭 좌/우 → 10초 누적 seek (`setTimeout` 500ms 후 실제 seek 실행)
+- `validatedOptions.touchGestures === false` 이면 더블탭 비활성화 (단일탭 토글만)
+- `currentTimeRef`로 setTimeout 안에서도 최신 currentTime 사용
+
+## 옵션과 events
+
+- [src/options.ts](src/options.ts) — `VpePlayerProps`, `VpePlayerOptions`, `VpePlayerEvents`, `getValidatedOptions()`
+- 주요 props (VpePlayerProps):
+  - `accessKey`, `devTestAppId`, `platform`('gov'|'pub'), `stage`('prod'|'beta')
+  - `events`, `options`, `customButton`, `errorOverride`, `override`, `layout`
+- 주요 events:
+  - `ready`, `play`, `pause`, `ended`, `seeking`/`seeked`, `timeupdate`, `volumechange`, `nextTrack`/`prevTrack`, `fullscreen`, `error`
+  - **`backPress`** — BackBtn이 호출. PR1에서 `props.backButton` 폐지하고 추가됨
+- 주요 options:
+  - `playlist`, `autostart`, `muted`, `aspectRatio`, `objectFit`, `controls`
+  - `controlBtn` — 컨트롤별 표시 토글 (`play`/`fullscreen`/`progressBar`/`volume`/`times`/`pictureInPicture`/`setting`/`subtitle`)
+  - `icon: IconOverrides` (PR1에서 `props.icon` → 여기로 이동)
+  - `touchGestures`, `controlActiveTime`, `playRateSetting`
+  - `screenRecordingPrevention`, `allowsPictureInPicture`, `staysActiveInBackground`
+  - `modalFullscreen`, `descriptionNotVisible`, `startMutedInfoNotVisible`
+  - `visibleWatermark`, `watermarkText`, `watermarkConfig`
+  - `captionStyle`, `setStartTime`, `repeat`, `playIndex`, `lowLatencyMode`
+
+## 그 외 주요 파일
+
+- [src/SettingsMenu.tsx](src/SettingsMenu.tsx) — 화질/재생속도/자막 선택 슬라이드업 메뉴
+- [src/Watermark.tsx](src/Watermark.tsx) — 텍스트 워터마크 (랜덤 위치 옵션)
+- [src/Cbtn.tsx](src/Cbtn.tsx) — 사용자 customButton 주입 (위치/flow 기반)
+- [src/hooks.ts](src/hooks.ts) — `useKeyAuthentication`/`useHlsPlaylistParsing`/`useControlsVisibility`/`usePayCheck`
+- [src/keyCheck.ts](src/keyCheck.ts) — 라이선스 키 검증 (난독화)
+- [src/payCheck.ts](src/payCheck.ts) — 결제 상태 검증 (난독화)
+- [src/ma.ts](src/ma.ts) / [src/maManager.ts](src/maManager.ts) / [src/maOrg.ts](src/maOrg.ts) — Media Analytics 리포팅
+- [src/captureProtection.ts](src/captureProtection.ts) — 화면 녹화 방지
+- [src/util.ts](src/util.ts) — `formatTime`, HLS playlist parsing, Expo Go 감지
+- [src/locales/](src/locales/) — i18n (ko/en/ja/zh), `i18n.ts` 초기화
+
+## example 앱
+
+- [example/src/App.js](example/src/App.js) — React Navigation 스택 등록
+- [example/src/HomeScreen.js](example/src/HomeScreen.js) — 홈 메뉴
+- 주요 데모:
+  - [BasicDemo.js](example/src/BasicDemo.js) — UGC 표준
+  - [LayoutDemo.js](example/src/LayoutDemo.js) — 사용자 정의 layout (pc/mobile/fullscreen × vod/live 6 variant)
+  - [ControlsShowcase.js](example/src/ControlsShowcase.js) — 모든 컨트롤이 한 화면에 보이는 디자인 검증 페이지
+  - [LiveDemo.js](example/src/LiveDemo.js), [Drm.js](example/src/Drm.js), [NcpDrm.js](example/src/NcpDrm.js)
+  - [Pip.js](example/src/Pip.js), [Watermark.js](example/src/Watermark.js), [ScreenRecordingPrevention.js](example/src/ScreenRecordingPrevention.js)
+  - [CustomButton.js](example/src/CustomButton.js), [IconChange.js](example/src/IconChange.js), [Override.js](example/src/Override.js), [ErrorOverride.js](example/src/ErrorOverride.js)
+- iOS 빌드: `example/ios/Podfile`에 `FMT_USE_CONSTEVAL=0` + `gnu++17` 패치 적용됨 (newer Xcode/Clang에서 fmt 빌드 에러 회피)
+
+## 빌드/검증 명령
+
+```sh
+yarn install            # Yarn 4 의존성 설치
+yarn prepare            # bob build → lib/ (필수, publish 직전)
+yarn lint               # ESLint 9 flat config
+yarn typecheck          # tsc
+yarn test               # Jest
+yarn clean              # lib/ 삭제
+
+# example
+yarn example            # Expo dev (cache 클리어)
+yarn ios:simulator      # iOS 시뮬레이터
+yarn ios:iphone         # 실 디바이스
+yarn android:fold7      # Android
+
+# release
+yarn release            # semantic release
+yarn release:beta       # beta pre-release
+```
+
+## Breaking changes (PR1/PR2 시점)
+
+PR1 도입 → 기존 `0.x` 사용자가 코드 수정 필요한 항목:
+
+1. **`props.backButton` 제거** — 이제 `events.backPress: () => navigation.goBack()` 사용
+2. **`props.icon` 폐지** — `options.icon: IconOverrides`로 이동 (위치 변경)
+3. **`PipBtn` 컴포넌트 폐지** (PR2) — RN에서 명시적 PIP 버튼은 비표준, 대신 `playerRef.current.pip()` ref API 또는 `allowsPictureInPicture` lifecycle 사용
+4. **`PlayerControls.tsx` 삭제** (PR2 Stage D) — `<VpePlayer />` 는 항상 ControlBar 사용. layout prop이 없으면 `defaultResponsiveLayout` 으로 동작
+
+## 작업 이력
+
+- [plan.md](plan.md) — PR1/PR2 단계별 plan, 결정사항, 진행 로그. AI 작업 시 가장 먼저 참조
+
+## AI 작업 가이드라인 (CLAUDE.md 발췌)
+
+- **주석은 한국어**, 필요한 곳에만 작성. 불필요한 docstring/comment 추가 금지
+- **존재하지 않는 시나리오에 대한 방어 코드 추가 금지** — 시스템 경계(사용자 입력, 외부 API)에서만 검증
+- **추측성 추상화 금지** — 3줄 코드 중복이 premature abstraction보다 낫다
+- **backwards-compat shim 금지** — 사용 안 하는 코드는 즉시 삭제
+- 리뷰 어려운 곳: `cd example && yarn ios:simulator`로 실 동작 검증 우선
+- 컨트롤 컴포넌트 추가 시: types.ts의 `ControlBarLayoutItemName`과 `VALID_LAYOUT_ITEM_NAMES` + ControlBarItemRenderers의 switch 두 곳을 같이 갱신
+- IconOverrides 키 추가 시: types.ts + 해당 컨트롤 + 사용 위치(`renderIcon` 호출) 같이 갱신
+- 새 PlayerContext 필드 추가 시: PlayerContext.tsx 타입 + VpePlayer.tsx의 useMemo value + deps 배열 모두 같이 수정
+- 핸들러 추가 시: Stage A의 `handlerRefs`/`stableActions` 패턴 따르기 (cascade useCallback 회피)
+
+## 알려진 잔여 항목 (plan.md 참조)
+
+- 단위 테스트 (Group/PlayBtn/SubtitleBtn 표시조건 등)
+- React Compiler 호환성 (handler ref → useCallback 정리)
+- 사용자 정의 layout에서 일부 edge case 추가 검증

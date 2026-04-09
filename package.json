@@ -19,6 +19,7 @@
     "eas:ios:prod": "eas build -p ios --profile production",
     "eas:ios:dev": "eas build -p ios --profile development",
     "eas:ios:submit": "eas build -p ios --profile production && eas submit -p ios",
+    "eas:ios:submitOnly": " eas submit -p ios",
     "eas:android:submit": "eas build -p android --profile production  &&  eas submit -p android --profile firebase-testing",
     "eas:android:only:submit": "eas submit -p android --profile firebase-testing"
   },
