@@ -1,6 +1,37 @@
 import { View, StatusBar, ScrollView, TouchableOpacity, Text, Switch, TextInput } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
+function AppBar({ title, onBack }) {
+	return (
+		<View
+			style={{
+				height: 50,
+				flexDirection: 'row',
+				alignItems: 'center',
+				justifyContent: 'center',
+				paddingHorizontal: 10,
+				borderBottomWidth: 1,
+				borderBottomColor: '#e5e5e5',
+				backgroundColor: '#fff',
+			}}
+		>
+			<TouchableOpacity
+				onPress={onBack}
+				hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+				style={{
+					position: 'absolute',
+					left: 10,
+					paddingHorizontal: 8,
+					paddingVertical: 4,
+				}}
+			>
+				<Text style={{ fontSize: 24, color: '#2e2e2e' }}>‹</Text>
+			</TouchableOpacity>
+			<Text style={{ fontSize: 16, fontWeight: '600', color: '#2e2e2e' }}>{title}</Text>
+		</View>
+	);
+}
+
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import * as Application from 'expo-application';
@@ -60,7 +91,18 @@ export default function App() {
 		<SafeAreaProvider>
 			<StatusBar barStyle={'dark-content'} />
 
-			<View style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 40 }}>
+			<SafeAreaView edges={['top', 'left', 'right']} style={{ backgroundColor: '#fff' }}>
+				<AppBar
+					title="VPE 라이선스 설정"
+					onBack={() => {
+						if (navigation.canGoBack()) {
+							navigation.goBack();
+						}
+					}}
+				/>
+			</SafeAreaView>
+
+			<View style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 20 }}>
 				<View style={{ width: '100%', flexDirection: 'column', gap: 20 }}>
 					<View>
 						<Text style={{ fontWeight: 500, fontSize: 16 }}>스테이지 설정</Text>
@@ -100,6 +142,32 @@ export default function App() {
 									테스트용 플레이어 생성시 Android , iOS 키를 위 내용으로 등록하세요.
 								</Text>
 							</View>
+						</View>
+					</View>
+
+					<View>
+						<View>
+							<Text style={{ fontSize: 16 }}>라이선스 키</Text>
+						</View>
+						<View>
+							<TextInput
+								editable
+								multiline
+								numberOfLines={4}
+								maxLength={40}
+								onChangeText={(text) => setLicKey(text)}
+								value={licKey}
+								style={{
+									backgroundColor: '#fff',
+									borderStyle: 'solid',
+									borderColor: '#cdcdcd',
+									paddingVertical: 10,
+									paddingHorizontal: 5,
+									borderWidth: 1,
+									borderRadius: 5,
+									marginTop: 10,
+								}}
+							/>
 						</View>
 					</View>
 
@@ -146,32 +214,6 @@ export default function App() {
 							<Text style={{ fontSize: 16 }}>Develop 여부</Text>
 						</View>
 						<Switch ios_backgroundColor="#3e3e3e" onValueChange={setIsDev} value={isDev} />
-					</View>
-
-					<View>
-						<View>
-							<Text style={{ fontSize: 16 }}>라이선스 키</Text>
-						</View>
-						<View>
-							<TextInput
-								editable
-								multiline
-								numberOfLines={4}
-								maxLength={40}
-								onChangeText={(text) => setLicKey(text)}
-								value={licKey}
-								style={{
-									backgroundColor: '#fff',
-									borderStyle: 'solid',
-									borderColor: '#cdcdcd',
-									paddingVertical: 10,
-									paddingHorizontal: 5,
-									borderWidth: 1,
-									borderRadius: 5,
-									marginTop: 10,
-								}}
-							/>
-						</View>
 					</View>
 				</View>
 				<View style={{ justifyContent: 'center', alignItems: 'center', paddingVertical: 20 }}>

@@ -19,7 +19,7 @@ export default function App() {
 		if (initLoad) return;
 		setTimeout(() => {
 			navigation.setOptions({
-				headerShown: true,
+				headerShown: false,
 			});
 			setInitLoad(true);
 		}, 300);
@@ -86,6 +86,7 @@ export default function App() {
 								},
 							},*/
 						],
+
 					}}
 				/>
 			)}
