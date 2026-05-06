@@ -86,7 +86,7 @@ export default function App() {
 								},
 							},*/
 						],
-
+						//aspectRatio:'21/9'
 					}}
 				/>
 			)}

@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.vpe.rn.testapp.v3",
-      "buildNumber": "16",
+      "buildNumber": "18",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "UIBackgroundModes": [
@@ -31,12 +31,11 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.vpe.rn.testapp.v3",
-      "supportsPictureInPicture": true,
       "permissions": [
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
       ],
-      "versionCode": 16
+      "versionCode": 18
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -55,7 +54,9 @@
           "enableAndroidPictureInPicture": true,
           "enableNotificationControls": true
         }
-      ]
+      ],
+      "expo-localization",
+      "./plugins/withReadMediaImagesPermissionFix"
     ],
     "extra": {
       "eas": {
