@@ -21,7 +21,12 @@
     "eas:ios:submit": "eas build -p ios --profile production && eas submit -p ios",
     "eas:ios:submitOnly": " eas submit -p ios",
     "eas:android:submit": "eas build -p android --profile production  &&  eas submit -p android --profile firebase-testing",
-    "eas:android:only:submit": "eas submit -p android --profile firebase-testing"
+    "eas:android:only:submit": "eas submit -p android --profile firebase-testing",
+    "------": "",
+    "sdk:build": "yarn --cwd ../vpe-react-native prepare",
+    "sdk:pack": "yarn sdk:build && yarn --cwd ../vpe-react-native pack -o ../vpe-react-native-demoapp/vendor/vpe-react-native.tgz",
+    "sdk:vendor": "yarn sdk:pack && yarn add vpe-react-native@file:./vendor/vpe-react-native.tgz",
+    "sdk:link": "yarn add vpe-react-native@portal:../vpe-react-native"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
@@ -47,7 +52,7 @@
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
     "react-native-svg": "15.12.1",
-    "vpe-react-native": "portal:../vpe-react-native"
+    "vpe-react-native": "file:./vendor/vpe-react-native.tgz"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

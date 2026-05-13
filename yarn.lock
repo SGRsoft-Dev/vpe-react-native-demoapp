@@ -5917,7 +5917,7 @@ __metadata:
     react-native-screens: "npm:~4.16.0"
     react-native-svg: "npm:15.12.1"
     typescript: "npm:~5.9.2"
-    vpe-react-native: "portal:../vpe-react-native"
+    vpe-react-native: "file:./vendor/vpe-react-native.tgz"
   languageName: unknown
   linkType: soft
 
@@ -7180,9 +7180,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vpe-react-native@portal:../vpe-react-native::locator=player-test-app%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "vpe-react-native@portal:../vpe-react-native::locator=player-test-app%40workspace%3A."
+"vpe-react-native@file:./vendor/vpe-react-native.tgz::locator=player-test-app%40workspace%3A.":
+  version: 2.1.3
+  resolution: "vpe-react-native@file:./vendor/vpe-react-native.tgz#./vendor/vpe-react-native.tgz::hash=cd34b7&locator=player-test-app%40workspace%3A."
   dependencies:
     "@miblanchard/react-native-slider": "npm:^2.6.0"
     "@sgrsoft/react-native-video": "npm:^6.16.1-sgrsoft.5"
@@ -7201,9 +7201,11 @@ __metadata:
     phosphor-react-native: "*"
     react: "*"
     react-native: "*"
+    react-native-safe-area-context: "*"
     react-native-svg: "*"
+  checksum: 10c0/fd15201233e1733e198f727a23e44fb024be4d19983db4424f07a87dffae7da2270fb0683248c3722a4a017a1fc1f1b17dab884c996ba6faae4f2a19f94fe84d
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "vtt.js@npm:^0.13.0":
   version: 0.13.0
